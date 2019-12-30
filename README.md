@@ -1,6 +1,8 @@
 # CBIR
 Conten Based Image Retrieval With Python
 
+Its just school project
+
 Requirements :
 - Python 3.x
 - imutils
