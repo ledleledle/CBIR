@@ -2,26 +2,22 @@ from libnya.colordescriptor import ColorDescriptor
 from libnya.pencari import Searcher
 import argparse
 import cv2
- 
+
 ap = argparse.ArgumentParser()
-ap.add_argument("-i", "--index", required = True,
-	help = "Path to where the computed index will be stored")
-ap.add_argument("-q", "--query", required = True,
-	help = "Path to the query image")
-ap.add_argument("-r", "--result-path", required = True,
-	help = "Path to the result path")
+ap.add_argument("-g", "--gambar", required = True,
+	help = "Pilih gambar yang ingin dicari")
 args = vars(ap.parse_args())
  
 cd = ColorDescriptor((8, 12, 3))
-query = cv2.imread(args["query"])
+query = cv2.imread(args["gambar"])
 features = cd.describe(query)
  
-searcher = Searcher(args["index"])
+searcher = Searcher('index.csv')
 results = searcher.search(features)
  
-cv2.imshow("Query", query)
+cv2.imshow("Gambar yang dicari", query)
  
 for (score, resultID) in results:
-	result = cv2.imread(args["result_path"] + "/" + resultID)
-	cv2.imshow("Result", result)
+	result = cv2.imread("coba/" + resultID)
+	cv2.imshow("Hasil", result)
 	cv2.waitKey(0)
